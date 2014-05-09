@@ -1,14 +1,16 @@
-Vagrant::Config.run do |config|
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  config.vm.forward_port 80, 2000
-  config.vm.forward_port 2003, 2003
+  config.vm.network 'forwarded_port', guest: 80, host: 2000
+  config.vm.network 'forwarded_port', guest: 8126, host: 8126
 
-  config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.module_path    = "puppet/modules"
-    puppet.manifest_file  = "base.pp"
+  config.vm.provision 'chef_solo' do |chef|
+    chef.add_recipe 'apt'
+    chef.add_recipe 'graphite'
   end
+
 end

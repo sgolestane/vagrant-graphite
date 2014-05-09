@@ -1,4 +1,4 @@
-vagrant-graphite-puppet
+vagrant-graphite
 =======================
 
 # graphite to go
@@ -13,8 +13,9 @@ Provision graphite in a virtual machine with vagrant and puppet
 ## Installation
 
 ```
-git clone https://github.com/sgolestane/vagrant-graphite-puppet.git
+git clone https://github.com/sgolestane/vagrant-graphite.git
 cd vagrant-graphite-puppet
+librarian-chef install
 vagrant up
 open http://localhost:2000/
 ```
